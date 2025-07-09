@@ -446,10 +446,10 @@ public:
   void display()
   {
     cout << "\n=== Hubungan antar prodi ===\n";
-    for (int i = 0; i < prodiList.size(); i++)
+    for (size_t i = 0; i < prodiList.size(); i++)
     {
       cout << prodiList[i] << ": ";
-      for (int j = 0; j < prodiList.size(); j++)
+      for (size_t j = 0; j < prodiList.size(); j++)
       {
         if (adjMatrix[i][j])
           cout << prodiList[j] << " ";
@@ -467,7 +467,7 @@ private:
 
   void sortByNIMSilent()
   {
-    sort(students.begin(), students.end(), [](const auto &a, const auto &b)
+    sort(students.begin(), students.end(), [](const tuple<string, string, string> &a, const tuple<string, string, string> &b)
          { return get<1>(a) < get<1>(b); });
   }
 
@@ -487,7 +487,7 @@ public:
   {
     sort(students.begin(), students.end());
     cout << "\n=== Daftar Mahasiswa (Urut Nama) ===\n";
-    for (int i = 0; i < students.size(); i++)
+    for (size_t i = 0; i < students.size(); i++)
     {
       cout << (i + 1) << ". Nama: " << get<0>(students[i])
            << ", NIM: " << get<1>(students[i])
@@ -497,10 +497,10 @@ public:
 
   void sortByNIM()
   {
-    sort(students.begin(), students.end(), [](const auto &a, const auto &b)
+    sort(students.begin(), students.end(), [](const tuple<string, string, string> &a, const tuple<string, string, string> &b)
          { return get<1>(a) < get<1>(b); });
     cout << "\n=== Daftar Mahasiswa (Urut NIM) ===\n";
-    for (int i = 0; i < students.size(); i++)
+    for (size_t i = 0; i < students.size(); i++)
     {
       cout << (i + 1) << ". NIM: " << get<1>(students[i])
            << ", Nama: " << get<0>(students[i])
@@ -574,7 +574,7 @@ public:
     }
 
     cout << "\n=== Data Mahasiswa Sorter ===\n";
-    for (int i = 0; i < students.size(); i++)
+    for (size_t i = 0; i < students.size(); i++)
     {
       cout << (i + 1) << ". Nama: " << get<0>(students[i])
            << ", NIM: " << get<1>(students[i])
