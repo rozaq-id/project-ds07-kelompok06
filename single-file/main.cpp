@@ -1338,7 +1338,7 @@ int interactiveMenu(const std::vector<std::string> &options, const std::string &
 
   auto isSeparator = [](const std::string &s)
   {
-    return s == "\n" || s.find("--->") != std::string::npos;
+    return s.find("=====") != std::string::npos || s == "";
   };
 
   // Cari pertama yang bukan separator
@@ -1485,49 +1485,49 @@ int main()
       "* Login",
       "* Register",
       "* Logout",
-      "* Tampilkan Sesi Aktif\n",
-
+      "* Tampilkan Sesi Aktif",
+      "",
       "===== PERPUSTAKAAN =====",
       "* Tampilkan Daftar Buku",
       "* Cari Buku",
       "* Pinjam Buku",
       "* Kembalikan Buku",
-      "* Riwayat Peminjaman Saya\n",
-
+      "* Riwayat Peminjaman Saya",
+      "",
       "===== KONSULTASI AKADEMIK =====",
       "* Daftar Antrian Konsultasi",
       "* Proses Antrian Konsultasi",
-      "* Tampilkan Antrian\n",
-
+      "* Tampilkan Antrian",
+      "",
       "===== RIWAYAT AKTIVITAS =====",
       "* Tampilkan Riwayat Aktivitas Saya",
-      "* Tampilkan Semua Aktivitas\n",
-
+      "* Tampilkan Semua Aktivitas",
+      "",
       "===== NAVIGASI KAMPUS =====",
       "* Tampilkan Peta Kampus",
       "* Cari Jalur Terpendek",
-      "* Tambah Jalur Baru\n",
-
+      "* Tambah Jalur Baru",
+      "",
       "===== DATA MAHASISWA =====",
       "* Tambah Mahasiswa",
       "* Tampilkan Daftar Mahasiswa",
-      "* Hapus Mahasiswa\n",
-
+      "* Hapus Mahasiswa",
+      "",
       "===== PENCARIAN & SORTING =====",
       "* Urutkan Mahasiswa berdasarkan Nama",
       "* Urutkan Mahasiswa berdasarkan NIM",
       "* Cari Mahasiswa berdasarkan NIM",
-      "* Cari Mahasiswa berdasarkan Nama\n",
-
+      "* Cari Mahasiswa berdasarkan Nama",
+      "",
       "===== SISTEM NILAI =====",
       "* Tambah Nilai ke BST",
-      "* Tampilkan Data Nilai\n",
-
+      "* Tampilkan Data Nilai",
+      "",
       "===== ADMINISTRASI =====",
       "* Hash Table Mahasiswa",
       "* Riwayat Transaksi",
-      "* Undo Transaksi\n",
-
+      "* Undo Transaksi",
+      "",
       "* Keluar"};
 
   int choice = 0;
@@ -1552,7 +1552,7 @@ int main()
 
     switch (choice)
     {
-    // ===== LOGIN SYSTEM =====
+    // ===== SISTEM LOGIN =====
     case 1: // Login
       clearScreen();
       cout << "==== Login SmartStudent ====" << endl;
@@ -1597,14 +1597,14 @@ int main()
       }
       break;
 
-    case 4: // Display current session
+    case 4: // Tampilkan Sesi Aktif
       clearScreen();
       cout << "==== Informasi Sesi ====" << endl;
       loginSystem.displayCurrentSession();
       break;
 
-    // ===== LIBRARY SYSTEM =====
-    case 5: // Display books
+    // ===== PERPUSTAKAAN =====
+    case 7: // Tampilkan Daftar Buku
       clearScreen();
       cout << "==== Daftar Buku Perpustakaan ====" << endl;
       library.displayBooks();
@@ -1614,7 +1614,7 @@ int main()
       }
       break;
 
-    case 6: // Search books
+    case 8: // Cari Buku
       clearScreen();
       cout << "==== Pencarian Buku ====" << endl;
       inputForm({"Kata kunci (judul/pengarang/kategori)"}, results);
@@ -1628,7 +1628,7 @@ int main()
       }
       break;
 
-    case 7: // Borrow book
+    case 9: // Pinjam Buku
       clearScreen();
       cout << "==== Pinjam Buku ====" << endl;
       inputForm({"ID Buku"}, results);
@@ -1652,7 +1652,7 @@ int main()
       }
       break;
 
-    case 8: // Return book
+    case 10: // Kembalikan Buku
       clearScreen();
       cout << "==== Kembalikan Buku ====" << endl;
       inputForm({"ID Buku"}, results);
@@ -1676,15 +1676,15 @@ int main()
       }
       break;
 
-    case 9: // Display borrowing history
+    case 11: // Riwayat Peminjaman Saya
       clearScreen();
       cout << "==== Riwayat Peminjaman Saya ====" << endl;
       borrowHistory.displayUserHistory(loginSystem.getCurrentUser());
       activityHistory.addActivity(loginSystem.getCurrentUser(), "Melihat riwayat peminjaman");
       break;
 
-    // ===== CONSULTATION QUEUE =====
-    case 10: // Add to consultation queue
+    // ===== KONSULTASI AKADEMIK =====
+    case 14: // Daftar Antrian Konsultasi
       clearScreen();
       cout << "==== Daftar Antrian Konsultasi ====" << endl;
       if (loginSystem.isLoggedIn())
@@ -1698,20 +1698,20 @@ int main()
       }
       break;
 
-    case 11: // Process consultation queue
+    case 15: // Proses Antrian Konsultasi
       clearScreen();
       cout << "==== Proses Antrian Konsultasi ====" << endl;
       queue.dequeue();
       break;
 
-    case 12: // Display queue
+    case 16: // Tampilkan Antrian
       clearScreen();
       cout << "==== Daftar Antrian Konsultasi ====" << endl;
       queue.display();
       break;
 
-    // ===== ACTIVITY HISTORY =====
-    case 13: // Display user activities
+    // ===== RIWAYAT AKTIVITAS =====
+    case 19: // Tampilkan Riwayat Aktivitas Saya
       clearScreen();
       cout << "==== Riwayat Aktivitas Saya ====" << endl;
       if (loginSystem.isLoggedIn())
@@ -1720,14 +1720,14 @@ int main()
       }
       break;
 
-    case 14: // Display all activities
+    case 20: // Tampilkan Semua Aktivitas
       clearScreen();
       cout << "==== Semua Riwayat Aktivitas ====" << endl;
       activityHistory.displayAllActivities();
       break;
 
-    // ===== CAMPUS NAVIGATION =====
-    case 15: // Display campus map
+    // ===== NAVIGASI KAMPUS =====
+    case 23: // Tampilkan Peta Kampus
       clearScreen();
       cout << "==== Peta Navigasi Kampus ====" << endl;
       campusNav.displayConnections();
@@ -1737,7 +1737,7 @@ int main()
       }
       break;
 
-    case 16: // Find shortest path
+    case 24: // Cari Jalur Terpendek
       clearScreen();
       cout << "==== Pencarian Jalur Terpendek ====" << endl;
       cout << "Lokasi: 0=Gerbang, 1=Perpustakaan, 2=Gedung Informatika, 3=Gedung Manajemen, 4=Kantin, 5=Masjid\n";
@@ -1754,7 +1754,7 @@ int main()
       }
       break;
 
-    case 17: // Add new path
+    case 25: // Tambah Jalur Baru
       clearScreen();
       cout << "==== Tambah Jalur Kampus Baru ====" << endl;
       cout << "Lokasi: 0=Gerbang, 1=Perpustakaan, 2=Gedung Informatika, 3=Gedung Manajemen, 4=Kantin, 5=Masjid\n";
@@ -1768,8 +1768,8 @@ int main()
       }
       break;
 
-    // ===== STUDENT MANAGEMENT =====
-    case 18: // Add student
+    // ===== DATA MAHASISWA =====
+    case 28: // Tambah Mahasiswa
       clearScreen();
       cout << "==== Tambah Mahasiswa ====" << endl;
       inputForm({"NIM", "Nama", "Prodi"}, results);
@@ -1780,13 +1780,13 @@ int main()
       }
       break;
 
-    case 19: // Display students
+    case 29: // Tampilkan Daftar Mahasiswa
       clearScreen();
       cout << "==== Daftar Mahasiswa ====" << endl;
       list.display();
       break;
 
-    case 20: // Delete student
+    case 30: // Hapus Mahasiswa
       clearScreen();
       cout << "==== Hapus Mahasiswa ====" << endl;
       inputForm({"NIM yang akan dihapus"}, results);
@@ -1797,8 +1797,8 @@ int main()
       }
       break;
 
-    // ===== SORTING & SEARCHING =====
-    case 21: // Sort by name
+    // ===== PENCARIAN & SORTING =====
+    case 33: // Urutkan Mahasiswa berdasarkan Nama
       clearScreen();
       cout << "==== Urutkan Mahasiswa berdasarkan Nama ====" << endl;
       sorter.clearData();
@@ -1806,7 +1806,7 @@ int main()
       sorter.sortByName();
       break;
 
-    case 22: // Sort by NIM
+    case 34: // Urutkan Mahasiswa berdasarkan NIM
       clearScreen();
       cout << "==== Urutkan Mahasiswa berdasarkan NIM ====" << endl;
       sorter.clearData();
@@ -1814,7 +1814,7 @@ int main()
       sorter.sortByNIM();
       break;
 
-    case 23: // Binary search by NIM
+    case 35: // Cari Mahasiswa berdasarkan NIM
       clearScreen();
       cout << "==== Cari Mahasiswa berdasarkan NIM (Binary Search) ====" << endl;
       sorter.clearData();
@@ -1826,7 +1826,7 @@ int main()
       }
       break;
 
-    case 24: // Linear search by name
+    case 36: // Cari Mahasiswa berdasarkan Nama
       clearScreen();
       cout << "==== Cari Mahasiswa berdasarkan Nama (Linear Search) ====" << endl;
       sorter.clearData();
@@ -1838,8 +1838,8 @@ int main()
       }
       break;
 
-    // ===== GRADING SYSTEM =====
-    case 25: // Add grade to BST
+    // ===== SISTEM NILAI =====
+    case 39: // Tambah Nilai ke BST
       clearScreen();
       cout << "==== Tambah Nilai ke BST ====" << endl;
       inputForm({"NIM", "Nilai"}, results);
@@ -1850,32 +1850,32 @@ int main()
       }
       break;
 
-    case 26: // Display grades
+    case 40: // Tampilkan Data Nilai
       clearScreen();
       cout << "==== Data Nilai (BST) ====" << endl;
       bst.display();
       break;
 
-    // ===== ADMINISTRATION =====
-    case 27: // Hash table operations
+    // ===== ADMINISTRASI =====
+    case 43: // Hash Table Mahasiswa
       clearScreen();
       cout << "==== Hash Table Mahasiswa ====" << endl;
       hashTable.display();
       break;
 
-    case 28: // Transaction history
+    case 44: // Riwayat Transaksi
       clearScreen();
       cout << "==== Riwayat Transaksi ====" << endl;
       stack.display();
       break;
 
-    case 29: // Undo transaction
+    case 45: // Undo Transaksi
       clearScreen();
       cout << "==== Undo Transaksi ====" << endl;
       stack.pop();
       break;
 
-    case 30: // Exit
+    case 47: // Exit
       clearScreen();
       cout << "Terima kasih telah menggunakan SmartStudent!\n";
       cout << "Sistem Layanan Mahasiswa Digital - Kampus Cakrawala\n";
@@ -1886,12 +1886,12 @@ int main()
       cout << "Pilihan tidak valid.\n";
     }
 
-    if (choice != 30)
+    if (choice != 47)
     {
       cout << "\nTekan apapun untuk kembali ke menu...";
       getch();
     }
-  } while (choice != 30);
+  } while (choice != 47);
 
   return 0;
 }
