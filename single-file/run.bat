@@ -1,11 +1,11 @@
 @echo off
 echo Running Single-File SmartStudent System...
 
-if exist SmartStudent-SingleFile.exe (
+if exist SmartStudent.exe (
     echo Starting SmartStudent...
-    SmartStudent-SingleFile.exe
+    SmartStudent.exe
 ) else (
-    echo SmartStudent-SingleFile.exe not found! Please build first using:
+    echo SmartStudent.exe not found! Please build first using:
     echo - build.bat
     pause
 )
